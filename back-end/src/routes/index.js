@@ -1,20 +1,13 @@
 import express from 'express';
 import userRoutes from '../routes/user-router.js';
 import authRoutes from '../routes/auth-routes.js';
+import router from './story-routes.js';
 
-const app = express();
+const { Router } = express;
+router.use('/users', userRoutes);
 
-app.use(express.json());
-
-
-app.use('/users', userRoutes);
-
-app.use('/auth', authRoutes);
+router.use('/auth', authRoutes);
 
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Servidor escuchando en el puerto ${PORT}`);
-});
 
-export default app;
+export default Router;

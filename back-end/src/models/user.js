@@ -3,17 +3,17 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
-  nombre: {
+  name: {
     type: String,
     required: true,
     trim: true
   },
-  apellidos: {
+  lastName: {
     type: String,
     required: true,
     trim: true
   },
-  correoElectronico: {
+  Email: {
     type: String,
     required: true,
     unique: true,
