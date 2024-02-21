@@ -1,0 +1,43 @@
+BadRequest:
+  description: La solicitud no es válida.
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          error:
+            type: string
+            description: Descripción del error.
+
+Unauthorized:
+  description: No autorizado, credenciales inválidas.
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          error:
+            type: string
+            description: Descripción del error.
+
+NotFound:
+  description: No se encontró el recurso solicitado.
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          error:
+            type: string
+            description: Descripción del error.
+
+InternalServerError:
+  description: Error interno del servidor.
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          error:
+            type: string
+            description: Descripción del error.

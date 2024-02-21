@@ -31,3 +31,36 @@ export const login = async (req, res) => {
     res.status(500).json({ mensaje: 'Error interno del servidor' });
   }
 };
+
+export const register = async (req, res) => {
+  const { name, lastName, email, password } = req.body;
+
+  try {
+    // Verificar si ya existe un usuario con el mismo correo electrónico
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ mensaje: 'El correo electrónico ya está en uso' });
+    }
+
+    // Encriptar la contraseña
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Crear el nuevo usuario en la base de datos
+    const newUser = new User({
+      name,
+      lastName,
+      email,
+      password: hashedPassword,
+    });
+    await newUser.save();
+
+    // Generar un token JWT para el nuevo usuario
+    const token = jwt.sign({ id: newUser._id }, config.jwtSecret, { expiresIn: '1h' });
+
+    // Devolver el token como respuesta
+    res.status(201).json({ token });
+  } catch (error) {
+    console.error('Error al crear usuario:', error);
+    res.status(500).json({ mensaje: 'Error interno del servidor' });
+  }
+};
