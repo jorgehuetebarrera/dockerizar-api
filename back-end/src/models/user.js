@@ -18,11 +18,6 @@ const userSchema = new Schema({
     required: true,
     unique: true,
     trim: true
-  },
-  rol: {
-    type: String,
-    enum: ['root', 'admin', 'usuarioNormal'],
-    default: 'usuarioNormal'
   }
 });
 

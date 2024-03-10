@@ -25,7 +25,7 @@ export const login = async (req, res) => {
     const token = jwt.sign({ id: user._id }, config.jwtSecret, { expiresIn: '1h' });
 
     // Devolver el token como respuesta
-    res.json({ token });
+    res.json({ token }); // Modificación aquí para devolver el token en la respuesta
   } catch (error) {
     console.error('Error al iniciar sesión:', error);
     res.status(500).json({ mensaje: 'Error interno del servidor' });
@@ -52,13 +52,12 @@ export const register = async (req, res) => {
       email,
       password: hashedPassword,
     });
+
+    console.log(newUser);
     await newUser.save();
 
-    // Generar un token JWT para el nuevo usuario
-    const token = jwt.sign({ id: newUser._id }, config.jwtSecret, { expiresIn: '1h' });
-
-    // Devolver el token como respuesta
-    res.status(201).json({ token });
+    // Devolver una respuesta de éxito sin token
+    res.status(201).json({ mensaje: 'Usuario creado exitosamente' });
   } catch (error) {
     console.error('Error al crear usuario:', error);
     res.status(500).json({ mensaje: 'Error interno del servidor' });

@@ -1,15 +1,16 @@
 import express from 'express';
 import userRoutes from '../routes/user-router.js';
 import authRoutes from '../routes/auth-routes.js';
-import router from './story-routes.js';
+import storyRouter from './story-routes.js';
 import * as AuthController from '../controllers/auth-controler.js';
 
-const { Router } = express;
+const router = express.Router();
 router.use('/users', userRoutes);
 
 router.use('/auth', authRoutes);
+router.use('/story', storyRouter);
 
-router.use('/register', AuthController.register);
+router.post('/register', AuthController.register);
 
 
-export default Router;
+export default router;

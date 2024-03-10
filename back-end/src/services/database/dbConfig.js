@@ -3,8 +3,6 @@ import mongoose from 'mongoose';
 const uri = 'mongodb+srv://user:1234@stories.q7jbuug.mongodb.net/?retryWrites=true&w=majority';
 
 const options = {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
 };
 
 const connectDB = async () => {
