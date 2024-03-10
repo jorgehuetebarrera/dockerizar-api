@@ -22,7 +22,7 @@ export const register = async (req, res) => {
       lastName,
       email,
       password: hashedPassword,
-      role:" "
+      role
     });
 
     await newUser.save();
@@ -63,4 +63,3 @@ export const login = async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 };
-
