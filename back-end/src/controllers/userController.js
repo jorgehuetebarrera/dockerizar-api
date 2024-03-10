@@ -14,7 +14,7 @@ export const createUser = async (req, res) => {
 
     // Crear un nuevo usuario
     const newUser = new User({ name, lastName, email, role });
-    console.log(User);
+    console.log(newUser);
     await newUser.save();
 
     res.status(201).json(newUser);

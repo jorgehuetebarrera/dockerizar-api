@@ -13,6 +13,11 @@ const userSchema = new Schema({
     required: true,
     trim: true
   },
+  password: {
+    type: String,
+    required: true,
+    trim: true
+  },
   email: {
     type: String,
     required: true,
@@ -21,8 +26,8 @@ const userSchema = new Schema({
   },
   role: {
     type: String,
-    enum: ['root', 'admin', 'normal'],
-    default: 'normal' // Rol por defecto: normal
+    required:true,
+    enum: ['root', 'admin', 'normal']
   }
 });
 

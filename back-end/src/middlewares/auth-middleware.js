@@ -1,23 +1,27 @@
-import { HttpStatusError } from "common-errors";
-import jwt from "jsonwebtoken";
-import logger from "../utils/logger.js";
-import config from "../config.js";
+// auth-middleware.js
 
-export function checkToken(req, res, next) {
-    console.log(req.headers.authorization);
+import jwt from 'jsonwebtoken';
+import config from '../config.js';
 
-    const { authorization } = req.headers;
+export const authenticateUser = (req, res, next) => {
+  const token = req.headers.authorization?.split(' ')[1];
 
-    if (!authorization) throw new HttpStatusError(401, 'No token provided');
+  if (!token) {
+    return res.status(401).json({ message: 'No token provided' });
+  }
 
-    const [_bearer, token] = authorization.split(' ');
-
-    try {
-        jwt.verify(token, config.app.secretKey);
-    } catch (err) {
-        logger.error(err.message);
-        throw new HttpStatusError(401, 'Invalid token');
-    }
-
+  try {
+    const decoded = jwt.verify(token, config.jwtSecret);
+    req.user = decoded;
     next();
-}
+  } catch (error) {
+    return res.status(401).json({ message: 'Invalid token' });
+  }
+};
+
+export const authorizeUser = (roles) => (req, res, next) => {
+  if (!req.user || !roles.includes(req.user.role)) {
+    return res.status(403).json({ message: 'Unauthorized' });
+  }
+  next();
+};
