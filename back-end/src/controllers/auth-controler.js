@@ -3,32 +3,28 @@ import jwt from 'jsonwebtoken';
 import config from '../config.js';
 import User from '../models/user.js';
 
-// Función para iniciar sesión
 export const login = async (req, res) => {
-  const { correoElectronico, contraseña } = req.body;
+  const { email, password } = req.body;
 
   try {
-    // Buscar el usuario en la base de datos por correo electrónico
-    const user = await User.findOne({ correoElectronico });
+    const user = await User.findOne({ email });
 
-    // Si no se encuentra el usuario, devolver un error de autenticación
     if (!user) {
-      return res.status(401).json({ mensaje: 'Credenciales inválidas' });
+      return res.status(401).json({ message: 'Invalid credentials' });
     }
 
-    // Verificar si la contraseña es correcta
-    if (!bcrypt.compareSync(contraseña, user.contraseña)) {
-      return res.status(401).json({ mensaje: 'Credenciales inválidas' });
+    const passwordMatch = bcrypt.compareSync(password, user.password);
+
+    if (!passwordMatch) {
+      return res.status(401).json({ message: 'Invalid credentials' });
     }
 
-    // Generar un token JWT
     const token = jwt.sign({ id: user._id }, config.jwtSecret, { expiresIn: '1h' });
 
-    // Devolver el token como respuesta
-    res.json({ token }); // Modificación aquí para devolver el token en la respuesta
+    res.json({ token });
   } catch (error) {
-    console.error('Error al iniciar sesión:', error);
-    res.status(500).json({ mensaje: 'Error interno del servidor' });
+    console.error('Error logging in:', error);
+    res.status(500).json({ message: 'Internal server error' });
   }
 };
 
@@ -36,16 +32,14 @@ export const register = async (req, res) => {
   const { name, lastName, email, password } = req.body;
 
   try {
-    // Verificar si ya existe un usuario con el mismo correo electrónico
     const existingUser = await User.findOne({ email });
+
     if (existingUser) {
-      return res.status(400).json({ mensaje: 'El correo electrónico ya está en uso' });
+      return res.status(400).json({ message: 'Email already in use' });
     }
 
-    // Encriptar la contraseña
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Crear el nuevo usuario en la base de datos
     const newUser = new User({
       name,
       lastName,
@@ -53,13 +47,11 @@ export const register = async (req, res) => {
       password: hashedPassword,
     });
 
-    console.log(newUser);
     await newUser.save();
 
-    // Devolver una respuesta de éxito sin token
-    res.status(201).json({ mensaje: 'Usuario creado exitosamente' });
+    res.status(201).json({ message: 'User created successfully' });
   } catch (error) {
-    console.error('Error al crear usuario:', error);
-    res.status(500).json({ mensaje: 'Error interno del servidor' });
+    console.error('Error creating user:', error);
+    res.status(500).json({ message: 'Internal server error' });
   }
 };

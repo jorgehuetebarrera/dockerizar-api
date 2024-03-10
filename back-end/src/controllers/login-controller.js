@@ -1,32 +1,32 @@
 import bcrypt from 'bcrypt';
-import { HttpStatusError } from 'common-errors';
 import jwt from 'jsonwebtoken';
+import User from '../models/user.js';
 
-import config from '../config.js';
+export const login = async (req, res) => {
+  const { email, password } = req.body;
 
-export function login(req, res, next){
-       const { username, password } = req.body;
-
-    const user = findUser(username);
-
-    if(user){
-        console.log(password, user.password);
-        if(bcrypt.compareSync(password, user.password)){
-            const userInfo = { id: user.id, name: user.name };
-            const jwtConfig = { expiresIn: 10 };
-            const token = jwt.sign(userInfo, config.app.secretKey, jwtConfig);
-            return res.send({token});
-        }
+  try {
+    // Verificar si el usuario existe en la base de datos
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(401).json({ message: 'Credenciales inválidas' });
     }
 
-    throw new HttpStatusError(401, 'Invalid credentials');
-}
+    // Verificar si la contraseña coincide
+    const passwordMatch = bcrypt.compareSync(password, user.password);
+    if (!passwordMatch) {
+      return res.status(401).json({ message: 'Credenciales inválidas' });
+    }
 
+    // Generar token JWT
+    const token = jwt.sign({ userId: user._id }, 'secret', { expiresIn: '1h' });
 
-
-
-
-
+    res.json({ token });
+  } catch (error) {
+    console.error('Error al iniciar sesión:', error);
+    res.status(500).json({ message: 'Error interno del servidor' });
+  }
+};
 
 
 
