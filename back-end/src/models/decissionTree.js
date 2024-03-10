@@ -2,11 +2,11 @@ import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
 
-const arbolDecisionesSchema = new Schema({
+const decissionTreeSchema = new Schema({
   nodoActual: { type: Number, required: true },
   arbol: { type: Schema.Types.Mixed, required: true },
 });
 
-const ArbolDecisiones = mongoose.model('ArbolDecisiones', arbolDecisionesSchema);
+const decissionTree = mongoose.model('decissionTree', decissionTreeSchema);
 
-export default ArbolDecisiones;
+export default decissionTree;

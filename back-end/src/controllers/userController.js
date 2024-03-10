@@ -4,16 +4,17 @@ import User from '../models/user.js';
 // Controlador para crear un nuevo usuario
 export const createUser = async (req, res) => {
   try {
-    const { nombre, apellidos, correoElectronico } = req.body;
+    const { name, lastName, email, role } = req.body;
 
     // Verificar si el correo electrónico ya está en uso
-    const existingUser = await User.findOne({ correoElectronico });
+    const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ mensaje: 'El correo electrónico ya está en uso' });
     }
 
     // Crear un nuevo usuario
-    const newUser = new User({ nombre, apellidos, correoElectronico });
+    const newUser = new User({ name, lastName, email, role });
+    console.log(User);
     await newUser.save();
 
     res.status(201).json(newUser);
@@ -65,7 +66,7 @@ export const updateUser = async (req, res) => {
   }
 };
 
-
+// Controlador para eliminar un usuario
 export const deleteUser = async (req, res) => {
   const { userId } = req.params;
   try {
