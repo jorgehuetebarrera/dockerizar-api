@@ -22,7 +22,7 @@ export const register = async (req, res) => {
       lastName,
       email,
       password: hashedPassword,
-      role
+
     });
 
     await newUser.save();
@@ -34,32 +34,4 @@ export const register = async (req, res) => {
   }
 };
 
-// Esta función de inicio de sesión necesita autenticación
-export const login = async (req, res) => {
-  const { email, password } = req.body;
 
-  try {
-    // Verificar la autenticación del usuario utilizando el middleware authenticateUser
-    authenticateUser(req, res, async () => {
-      const user = await User.findOne({ email });
-
-      if (!user) {
-        return res.status(401).json({ message: 'Invalid credentials' });
-      }
-
-      const passwordMatch = bcrypt.compare(password, user.password);
-
-      if (!passwordMatch) {
-        return res.status(401).json({ message: 'Invalid credentials' });
-      }
-
-      // Se verifica la autenticación antes de generar el token
-      const token = jwt.sign({ id: user._id, role: user.role }, config.jwtSecret, { expiresIn: '1h' });
-
-      res.json({ token });
-    });
-  } catch (error) {
-    console.error('Error logging in:', error);
-    res.status(500).json({ message: 'Internal server error' });
-  }
-};

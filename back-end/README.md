@@ -1,8 +1,8 @@
-# API Backend para Juego de Elecciones con Sistema de Gestión de Usuarios
+# API Backend para Juego de Elecciones ('Noche en Arcadia')con Sistema de Gestión de Usuarios
 
 Esta es una API backend desarrollada en Node.js utilizando Express y MongoDB para un juego de elecciones. Además, incluye un sistema de gestión de usuarios para autenticación y control de acceso.
 
-## Funcionalidades del Juego de Elecciones
+## Funcionalidades del Juego Noche en Arcadia
 
 La API proporciona las siguientes funcionalidades para el juego de elecciones:
 
