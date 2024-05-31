@@ -1,16 +1,14 @@
-import express from 'express';
-import userRoutes from '../routes/user-router.js';
-import authRoutes from '../routes/auth-routes.js';
-import storyRouter from './story-routes.js';
-import * as AuthController from '../controllers/auth-controler.js';
+import { Router } from 'express';
+import {register, login, getUserById, updateUserById, deleteUserByEmail} from '../controllers/userController.js'
 
-const router = express.Router();
-router.use('/users', userRoutes);
+const router = Router();
+router.post('/user/register', register);
+router.post('/user/login', login);
 
-router.use('/auth', authRoutes);
-router.use('/story', storyRouter);
+router.get('/user/data/id/:id', getUserById);
 
-router.post('/register', AuthController.register);
-
+router.put('/user/update/id/:id', updateUserById);
+router.delete('/user/delete/:email', deleteUserByEmail);
 
 export default router;
+

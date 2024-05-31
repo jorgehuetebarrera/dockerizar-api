@@ -3,12 +3,12 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
-  name: {
+  userName: {
     type: String,
     required: true,
     trim: true
   },
-  lastName: {
+  surName: {
     type: String,
     required: true,
     trim: true
@@ -23,11 +23,6 @@ const userSchema = new Schema({
     required: true,
     unique: true,
     trim: true
-  },
-  role: {
-    type: String,
-    required:true,
-    enum: ['root', 'admin', 'normal']
   }
 });
 
