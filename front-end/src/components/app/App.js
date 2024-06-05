@@ -4,11 +4,11 @@ import ArbolDecisiones from './ArbolDecisiones';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [setUserToken] = useState(null); // Opcional: almacenar el token del usuario
+  
 
   const handleLoginSuccess = (token) => {
     setIsLoggedIn(true);
-    setUserToken(token); // Opcional: almacenar el token del usuario en el estado
+    
   };
 
   return (
