@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import './styles.css';
+import '../app/App.css';
 
-const CreateUser = () => {
+const CreateUser = ({ onRegisterSuccess }) => {
   const [userName, setUserName] = useState('');
   const [surName, setSurName] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
-  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,13 +29,18 @@ const CreateUser = () => {
 
       if (response.ok) {
         console.log('Registration successful!');
-        navigate('/login'); // Redirigir a la página de login después del registro exitoso
+        onRegisterSuccess();
       } else {
         console.error('Registration failed');
       }
     } catch (error) {
       console.error('Error registering:', error);
     }
+  };
+
+  const redirectToLogin = () => {
+    // Aquí puedes realizar la redirección al formulario de inicio de sesión
+    window.location.href = '/login'; // Cambia la ruta según tu configuración
   };
 
   return (
@@ -81,6 +86,7 @@ const CreateUser = () => {
       </label>
       <br />
       <button type="submit">Register</button>
+      <button type="button" onClick={redirectToLogin}>Go to Login</button>
     </form>
   );
 };

@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import './styles.css';
+import '../app/App.css';
 
 const LoginForm = ({ onLoginSuccess }) => {
   const [email, setEmail] = useState('');
@@ -31,10 +33,10 @@ const LoginForm = ({ onLoginSuccess }) => {
   return (
     <div>
       <h2>Login</h2>
-      <form onSubmit={handleLogin}>
+      <form className='form-container' onSubmit={handleLogin}>
         <div>
-          <label>Email:</label>
-          <input
+          <label className='form-label'>Email:</label>
+          <input className='from-input'
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -42,15 +44,16 @@ const LoginForm = ({ onLoginSuccess }) => {
           />
         </div>
         <div>
-          <label>Password:</label>
-          <input
+          <label className='form-label'>Password:</label>
+          <input className='from-input'
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
         </div>
-        <button type="submit">Login</button>
+        <button type="submit" className='form-button'>Login</button>
+        
       </form>
     </div>
   );
