@@ -1,28 +1,40 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import LoginForm from './LoginForm';
+import LoginForm from './logingForm';
 import ArbolDecisiones from './ArbolDecisiones';
+import CreateUser from './CreateUser';
+import './App.css';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [setUserToken] = useState(null); // Opcional: almacenar el token del usuario
-  const history = useHistory();
+  const [showRegistration, setShowRegistration] = useState(false);
 
   const handleLoginSuccess = (token) => {
     setIsLoggedIn(true);
-    setUserToken(token); // Opcional: almacenar el token del usuario en el estado
+  };
+
+  const handleShowRegistration = () => {
+    setShowRegistration(true);
+  };
+
+  const handleRegisterSuccess = () => {
+    setShowRegistration(false);
+    setIsLoggedIn(true);
   };
 
   return (
     <div className="App">
       <h1>Sombras de la Noche</h1>
       {!isLoggedIn ? (
-        <>
-          <LoginForm onLoginSuccess={handleLoginSuccess} />
-          <button onClick={() => history.push('/create-user')}>
-            Go to Create User
-          </button>
-        </>
+        showRegistration ? (
+          <CreateUser onRegisterSuccess={handleRegisterSuccess} />
+        ) : (
+          <>
+            <LoginForm onLoginSuccess={handleLoginSuccess} />
+            <button onClick={handleShowRegistration} className='button-register'>
+              Registrar usuario
+            </button>
+          </>
+        )
       ) : (
         <ArbolDecisiones />
       )}
