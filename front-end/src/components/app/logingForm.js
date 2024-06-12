@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import './styles.css';
+import '../app/App.css';
 
 const LoginForm = ({ onLoginSuccess }) => {
   const [email, setEmail] = useState('');
@@ -8,7 +10,6 @@ const LoginForm = ({ onLoginSuccess }) => {
     e.preventDefault();
 
     try {
-      // Realizar la lógica de inicio de sesión (por ejemplo, con fetch)
       const response = await fetch('http://localhost:3000/user/login', {
         method: 'POST',
         headers: {
@@ -20,10 +21,9 @@ const LoginForm = ({ onLoginSuccess }) => {
       if (response.ok) {
         const data = await response.json();
         console.log('Login successful!');
-        onLoginSuccess(data.token); // Llama a la función de éxito con el token obtenido (si es necesario)
+        onLoginSuccess(data.token); // Llama a la función de éxito con el token obtenido
       } else {
         console.error('Login failed');
-        // Manejar el error de inicio de sesión (mostrar mensaje al usuario, etc.)
       }
     } catch (error) {
       console.error('Error logging in:', error);
@@ -33,10 +33,10 @@ const LoginForm = ({ onLoginSuccess }) => {
   return (
     <div>
       <h2>Login</h2>
-      <form onSubmit={handleLogin}>
+      <form className='form-container' onSubmit={handleLogin}>
         <div>
-          <label>Email:</label>
-          <input
+          <label className='form-label'>Email:</label>
+          <input className='from-input'
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -44,15 +44,16 @@ const LoginForm = ({ onLoginSuccess }) => {
           />
         </div>
         <div>
-          <label>Password:</label>
-          <input
+          <label className='form-label'>Password:</label>
+          <input className='from-input'
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
         </div>
-        <button type="submit">Login</button>
+        <button type="submit" className='form-button'>Login</button>
+        
       </form>
     </div>
   );

@@ -1,0 +1,78 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f2f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+h2 {
+  color: #333;
+  text-align: center;
+}
+
+form {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 400px;
+  width: 100%;
+}
+
+form div {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+}
+
+input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #28a745;;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.button-register {
+  background-color: #28a745;
+  text-align: center;
+  margin-top: 20px; /* Añade margen top de 20px */
+  display:inline ; /* Hacer que el botón sea un bloque para centrarlo */
+  margin-left: auto; /* Centrar horizontalmente */
+  margin-right: 250px; /* Centrar horizontalmente */
+  border: 2px solid #c0c0c0; /* Agrega un borde de 2px sólido de color gris perla */
+  border-radius: 4px; /* Agrega un borde redondeado */
+  padding: 10px 20px;
+  size:50px /* Añade relleno para hacer el botón más grande */
+}
+button:hover {
+  background-color: #0056b3;
+}
+
+button:focus {
+  outline: none;
+}
