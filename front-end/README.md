@@ -34,7 +34,7 @@ back-end/
 ├── app.js
 ├── config.js
 └── index.js
-`</code></div>``</div></pre>`
+
 
 ### Descripción de Archivos y Carpetas
 
