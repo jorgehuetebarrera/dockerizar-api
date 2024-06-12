@@ -47,10 +47,95 @@ Para configurar y ejecutar el proyecto en tu entorno local, sigue estos pasos:
 
 ## Documentación de la API
 
-Para obtener información detallada sobre los endpoints de la API y cómo utilizarlos, consulta la documentación en [Postman](link_postman).[colection](https://drive.google.com/file/d/1mQBY_-ZW3GfU3KH_m8pHZ3yqKP8ip1Vm/view?usp=drive_link)
 
-¡Disfruta del juego de elecciones y del sistema de gestión de usuarios!
+## Estructura de Carpetas
+
+El backend está organizado en varias carpetas, cada una con un propósito específico:
+
+* **`loaders`** : Contiene archivos de inicialización de la aplicación, donde se configuran y cargan los módulos necesarios como Express, bases de datos, etc.
+* **`middlewares`** : Aquí se encuentran los middlewares utilizados en la aplicación, como la validación de datos de usuario y la autenticación.
+* **`models`** : Define los esquemas de los modelos de datos utilizados en la aplicación, utilizando Mongoose para interactuar con la base de datos MongoDB.
+* **`openapi`** : Contiene archivos YAML que definen la especificación OpenAPI de la API REST.
+* **`routes`** : Define las rutas de la API REST, que dirigen las solicitudes HTTP a los controladores correspondientes.
+* **`services`** : Aquí se encuentran los servicios utilizados en la aplicación, como la configuración de la base de datos y otros servicios utilitarios.
+* **`test`** : Contiene archivos de pruebas unitarias para los controladores y middlewares de la aplicación.
+* **`utils`** : Incluye archivos de utilidades, como un logger y funciones de paginación.
+
+## Configuración
+
+El archivo `config.js` contiene la configuración de la aplicación, como el puerto en el que se ejecutará el servidor y las credenciales de acceso a servicios externos, que se cargan desde variables de entorno.
+
 
 ```
+const config = {
+      port: process.env.PORT || 3000,
+      icon: {
+        url:process.env.ICON_URL,
+        apiKey: process.env.ICON_API_KEY,},
+        app: {
+          secretKey: process.env.SECRET_KEY,
+          dbUrl: process.env.DB_URL,
+        },
+}
+```
+
+
+## Base de Datos
+
+Utilizamos MongoDB como base de datos para nuestra aplicación. La conexión con la base de datos se establece en el archivo `dbConfig.js` dentro de la carpeta `services/database`.
+
 
 ```
+import mongoose from 'mongoose';const uri = 'mongodb+srv://user:1234@stories.q7jbuug.mongodb.net/?retryWrites=true&w=majority';const options = {
+};const connectDB = async () => {
+  try {
+    await mongoose.connect(uri, options);
+    console.log('Conectado a MongoDB Atlas');
+  } catch (error) {
+    console.error('Error al conectar a MongoDB Atlas:', error);
+  }
+};export default connectDB;
+```
+
+La carpeta `test` contiene archivos de prueba unitaria para los controladores y middlewares de la aplicación. Utilizamos Jest como framework de pruebas.
+
+```
+describe('User Middleware', () => {
+  // Mock req, res objects for testing
+  let req, res, next;
+  beforeEach(() => {
+    req = {
+      body: {},
+    };
+    res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    };
+    next = jest.fn();
+  });
+
+  describe('validateUserData middleware', () => {
+    test('should pass validation with valid user data', () => {
+      const validUserData = {
+        name: 'John',
+        lastName: 'Doe',
+        email: 'john@example.com',
+        role: 'admin',
+      };
+
+      req.body = validUserData;
+
+      validateUserData(req, res, next);
+
+      expect(next).toHaveBeenCalledTimes(1);
+    });
+
+    // Más pruebas aquí...
+  });
+});
+```
+
+
+## Autores
+
+* Jorge Huete Barrera
