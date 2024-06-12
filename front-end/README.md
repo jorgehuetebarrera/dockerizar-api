@@ -1,70 +1,129 @@
-# Getting Started with Create React App
+## Documentación del Proyecto Back-End
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este repositorio contiene el código fuente del proyecto back-end, que consiste en una API RESTful construida con Express y MongoDB para gestionar usuarios y autenticación.
 
-## Available Scripts
+### Estructura del Proyecto
 
-In the project directory, you can run:
+El proyecto está estructurado de la siguiente manera:
 
-### `npm start`
+back-end/
+│
+├── carpeta controllers/
+│   ├── userController.js
+│   └── authController.js
+│
+├── carpeta routes/
+│   ├── index.js
+│   └── user-router.js
+│
+├── carpeta services/
+│   └── database/
+│       ├── dbConfig.js
+│       └── userdb.js
+│
+├── carpeta test/
+│   ├── auth-controller.test.js
+│   ├── user-controller.test.js
+│   ├── user-middleware.test.js
+│   └── auth-middleware.test.js
+│
+├── carpeta utils/
+│   ├── logger.js
+│   └── pagination.js
+│
+├── app.js
+├── config.js
+└── index.js
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Descripción de Archivos y Carpetas
 
-### `npm test`
+* **carpeta controllers/** : Contiene controladores para gestionar usuarios y autenticación.
+* `userController.js`: Controlador para las operaciones CRUD de usuarios.
+* `authController.js`: Controlador para la autenticación de usuarios.
+* **carpeta routes/** : Define las rutas de la API.
+* `index.js`: Archivo principal para definir las rutas principales de la API.
+* `user-router.js`: Define las rutas relacionadas con la gestión de usuarios.
+* **carpeta services/database/** : Contiene archivos para la configuración y conexión a la base de datos MongoDB.
+* `dbConfig.js`: Configuración de la conexión a la base de datos.
+* `userdb.js`: Archivo de conexión específica para las operaciones relacionadas con los usuarios.
+* **carpeta test/** : Contiene archivos de prueba para realizar pruebas unitarias.
+* `auth-controller.test.js`: Pruebas para el controlador de autenticación.
+* `user-controller.test.js`: Pruebas para el controlador de usuarios.
+* `user-middleware.test.js`: Pruebas para middleware relacionados con usuarios.
+* `auth-middleware.test.js`: Pruebas para middleware relacionados con autenticación.
+* **carpeta utils/** : Contiene utilidades compartidas.
+* `logger.js`: Configuración del registro de eventos.
+* `pagination.js`: Funciones de paginación para las respuestas de la API.
+* **app.js** : Archivo principal que crea la aplicación Express y la inicializa.
+* **config.js** : Archivo de configuración que contiene las variables de entorno y otras configuraciones.
+* **index.js** : Punto de entrada del servidor que inicia la aplicación Express y se conecta a la base de datos.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Ejemplos de Código
 
-### `npm run build`
+A continuación se presentan algunos ejemplos de código de los archivos mencionados:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* **userController.js** :
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+import User from '../models/user.js';export const register = async (req, res) => {
+  // Implementación de la lógica para registrar un nuevo usuario
+};export const login = async (req, res) => {
+  // Implementación de la lógica para el inicio de sesión de usuario
+};
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+* **user-router.js** :
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```
+import { Router } from 'express';
+import { register, login } from '../controllers/userController.js';const router = Router();router.post('/register', register);
+router.post('/login', login);export default router;
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+* **dbConfig.js** :
 
-### Code Splitting
+```
+import mongoose from 'mongoose';
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+const uri = process.env.DB_URL;
 
-### Analyzing the Bundle Size
+const options = {};
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+const connectDB = async () => {
+  try {
+    await mongoose.connect(uri, options);
+    console.log('Conectado a MongoDB');
+  } catch (error) {
+    console.error('Error al conectar a MongoDB:', error);
+  }
+};
 
-### Making a Progressive Web App
+export default connectDB;
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Ejecución del Proyecto
 
-### Deployment
+Para ejecutar el proyecto, asegúrese de tener MongoDB instalado y configurado. Luego, siga estos pasos:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+1. Instale las dependencias del proyecto:
 
-### `npm run build` fails to minify
+npm install
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+2. Inicie el servidor:
+
+npm start
+
+### Ejecución de Pruebas
+
+Puede ejecutar las pruebas unitarias utilizando el siguiente comando:
+
+npm test
