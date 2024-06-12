@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './arbolDecisiones.css';
 
-
 // Función para generar el árbol de decisiones
 const generarArbolDeDecisiones = () => {
   return {
@@ -147,6 +146,11 @@ function ArbolDecisiones() {
     setNodoActual(destino);
   };
 
+  // Función para reiniciar el juego
+  const reiniciarJuego = () => {
+    setNodoActual(1);
+  };
+
   return (
     <div className="ArbolDecisiones">
       {/* Renderizado del texto del nodo actual */}
@@ -155,6 +159,8 @@ function ArbolDecisiones() {
       {nodo.opciones.map((opcion, index) => (
         <button key={index} onClick={() => handleDecision(opcion.destino)}>{opcion.texto}</button>
       ))}
+      {/* Botón para reiniciar el juego */}
+      <button onClick={reiniciarJuego}>Reiniciar Juego</button>
     </div>
   );
 }

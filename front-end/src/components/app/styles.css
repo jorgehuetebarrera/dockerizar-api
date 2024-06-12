@@ -61,12 +61,13 @@ button {
   background-color: #28a745;
   text-align: center;
   margin-top: 20px; /* Añade margen top de 20px */
-  display: flex; /* Hacer que el botón sea un bloque para centrarlo */
+  display:inline ; /* Hacer que el botón sea un bloque para centrarlo */
   margin-left: auto; /* Centrar horizontalmente */
   margin-right: 250px; /* Centrar horizontalmente */
   border: 2px solid #c0c0c0; /* Agrega un borde de 2px sólido de color gris perla */
   border-radius: 4px; /* Agrega un borde redondeado */
-  padding: 10px 20px; /* Añade relleno para hacer el botón más grande */
+  padding: 10px 20px;
+  size:50px /* Añade relleno para hacer el botón más grande */
 }
 button:hover {
   background-color: #0056b3;
