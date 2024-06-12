@@ -55,9 +55,13 @@ export const login = async (req, res, next) => {
 
     if (user) {
       const isPasswordValid = await bcrypt.compare(password, user.password);
+      if (!config.app.secretKey) {
+        throw new Error('Missing secretKey in configuration');
+      }
+
 
       if (isPasswordValid) {
-        const token = jwt.sign({ id: user._id, email: user.email },config.app.secretKey, { expiresIn: '30d' });
+        const token = jwt.sign({ id: user._id, email: user.email }, config.app.secretKey, { expiresIn: '30d' });
         console.log(`User ${email} logged in successfully`);
         return res.json({ token, email: user.email });
       }
