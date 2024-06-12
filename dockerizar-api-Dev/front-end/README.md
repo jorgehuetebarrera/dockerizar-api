@@ -1,70 +1,115 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+El front-end del proyecto está construido con React y consiste en una interfaz de usuario para interactuar con la API back-end.
 
-## Available Scripts
+#### Estructura del Proyecto Front-End
 
-In the project directory, you can run:
+El proyecto front-end está estructurado de la siguiente manera:
 
-### `npm start`
+front-end/
+│
+├── carpeta components/
+│   ├── app/
+│   │   ├── App.js
+│   │   ├── ArbolDecisiones.js
+│   │   ├── CreateUser.js
+│   │   ├── LoginForm.js
+│   │   └── styles.css
+│   │
+│   └── index.js
+│
+├── index.js
+├── index.css
+└── reportWebVitals.js
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+#### Ejemplos de Código
 
-### `npm test`
+A continuación, se presentan algunos ejemplos de código de los archivos mencionados:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* **App.js** (Componente principal):
 
-### `npm run build`
+```
+import React, { useState } from 'react';
+import LoginForm from './logingForm';
+import ArbolDecisiones from './ArbolDecisiones';
+import CreateUser from './CreateUser';
+import './styles.css';function App() {
+  // Lógica del componente
+}export default App;
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+* **LoginForm.js** (Componente para el formulario de inicio de sesión):
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+import React, { useState } from 'react';
 
-### `npm run eject`
+const LoginForm = ({ onLoginSuccess }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+  const handleLogin = async (e) => {
+    e.preventDefault();
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    try {
+      // Realizar la lógica de inicio de sesión (por ejemplo, con fetch)
+      const response = await fetch('http://localhost:3000/user/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password })
+      });
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Login successful!');
+        onLoginSuccess(data.token); // Llama a la función de éxito con el token obtenido (si es necesario)
+      } else {
+        console.error('Login failed');
+        // Manejar el error de inicio de sesión (mostrar mensaje al usuario, etc.)
+      }
+    } catch (error) {
+      console.error('Error logging in:', error);
+    }
+  };
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+  return (
+    <div>
+      <h2>Login</h2>
+      <form onSubmit={handleLogin}>
+        <div>
+          <label>Email:</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label>Password:</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  );
+};
 
-## Learn More
+export default LoginForm;
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### Ejecución del Proyecto
 
-### Code Splitting
+Para ejecutar el proyecto front-end, siga los siguientes pasos:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. Asegúrese de tener Node.js y npm instalados.
+2. Instale las dependencias del proyecto con `npm install`.
+3. Inicie la aplicación React con `npm start`.
