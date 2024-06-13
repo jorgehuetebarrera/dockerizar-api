@@ -1,0 +1,303 @@
+/ping:
+  get:
+    summary: pong
+    responses:
+      '200':
+        description: ping/pong
+/auth/register:
+  post:
+    summary: Register a new user
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              lastName:
+                type: string
+              email:
+                type: string
+              role:
+                type: string
+    responses:
+      '201':
+        description: User successfully registered
+      '400':
+        description: Invalid request body
+
+/auth/login:
+  post:
+    summary: User login
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+              password:
+                type: string
+    responses:
+      '200':
+        description: User logged in successfully
+      '401':
+        description: Unauthorized, invalid credentials
+
+/users:
+  post:
+    summary: Create a new user
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              lastName:
+                type: string
+              email:
+                type: string
+              role:
+                type: string
+    responses:
+      '201':
+        description: User created successfully
+      '400':
+        description: Invalid request body
+
+  get:
+    summary: Get all users
+    responses:
+      '200':
+        description: List of users retrieved successfully
+
+/users/{id}:
+  get:
+    summary: Get a user by ID
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    responses:
+      '200':
+        description: User retrieved successfully
+      '404':
+        description: User not found
+
+  put:
+    summary: Update a user by ID
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              lastName:
+                type: string
+              email:
+                type: string
+              role:
+                type: string
+    responses:
+      '200':
+        description: User updated successfully
+      '404':
+        description: User not found
+      '400':
+        description: Invalid request body
+
+  delete:
+    summary: Delete a user by ID
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    responses:
+      '204':
+        description: User deleted successfully
+      '404':
+        description: User not found
+
+/stories:
+  post:
+    summary: Create a new story
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema: # Schema definition for the request body
+            type: object
+            properties:
+              title:
+                type: string
+              content:
+                type: string
+    responses:
+      '201':
+        description: Story created successfully
+      '400':
+        description: Invalid request body
+
+  get:
+    summary: Get all stories
+    responses:
+      '200':
+        description: List of stories retrieved successfully
+
+/stories/{id}:
+  get:
+    summary: Get a story by ID
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    responses:
+      '200':
+        description: Story retrieved successfully
+      '404':
+        description: Story not found
+
+  put:
+    summary: Update a story by ID
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+              content:
+                type: string
+    responses:
+      '200':
+        description: Story updated successfully
+      '404':
+        description: Story not found
+      '400':
+        description: Invalid request body
+
+  delete:
+    summary: Delete a story by ID
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    responses:
+      '204':
+        description: Story deleted successfully
+      '404':
+        description: Story not found
+
+/stages:
+  post:
+    summary: Create a new stage
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema: # Schema definition for the request body
+            type: object
+            properties:
+              storyId:
+                type: string
+              content:
+                type: string
+    responses:
+      '201':
+        description: Stage created successfully
+      '400':
+        description: Invalid request body
+
+  get:
+    summary: Get all stages
+    responses:
+      '200':
+        description: List of stages retrieved successfully
+
+/stages/{id}:
+  get:
+    summary: Get a stage by ID
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    responses:
+      '200':
+        description: Stage retrieved successfully
+      '404':
+        description: Stage not found
+
+  put:
+    summary: Update a stage by ID
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              storyId:
+                type: string
+              content:
+                type: string
+    responses:
+      '200':
+        description: Stage updated successfully
+      '404':
+        description: Stage not found
+      '400':
+        description: Invalid request body
+
+  delete:
+    summary: Delete a stage by ID
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    responses:
+      '204':
+        description: Stage deleted successfully
+      '404':
+        description: Stage not found

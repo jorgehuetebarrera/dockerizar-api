@@ -1,20 +1,143 @@
-# DAW
- ## esto hace referencia a un h2 en html
- ### h3
- #### h4
- ##### h5
- **con esto el texto es en negrita **
- *esto es para poner la letra en cursiva *
- ~~ con esto te tacha el texto ~~
-<sub> para un subtitulo</sub>
-<sup> para poner la letra como en una potencia</sup>
+<<<<<<< HEAD
 
 
+## Documentación del Proyecto
 
-Un archivo README contiene información acerca de otros archivos en un directorio. Es una forma de documentación de software, usualmente en un archivo de texto plano llamado READ.ME, README.TXT, README.md (para un archivo Markdown), README.1ST o simplemente README. En ocasiones, en español (y sobre todo en la década de 1990) puede venir traducido como LEEME.TXT.
+Este repositorio contiene el código fuente del proyecto, que está dividido en una parte back-end y una parte front-end. A continuación, se detallan ambos aspectos del proyecto.
 
-El nombre del archivo es generalmente escrito en mayúsculas. En los sistemas Unix-like, generalmente los nombres se escriben en minúscula, y esto hace que en un listado de archivos salga primero el archivo README
+### Back-End
 
-![esto es un gif] (https://images-ext-2.discordapp.net/external/rAA1hgxEqagg2Kz0AL3sIsaTjQmVUtOWBSstJ_021Cg/https/raw.githubusercontent.com/gist/ManulMax/2d20af60d709805c55fd784ca7cba4b9/raw/bcfeac7604f674ace63623106eb8bb8471d844a6/github.gif)
+El back-end del proyecto consiste en una API RESTful construida con Express y MongoDB para gestionar usuarios y autenticación.
 
-![esto es una imagen](https://www.google.es/url?sa=i&url=https%3A%2F%2Fcnnespanol.cnn.com%2Ftag%2Fimagenes%2F&psig=AOvVaw0tA-TE_k3Ocxwl12yrB1Ca&ust=1670695846298000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCOiqqZeR7fsCFQAAAAAdAAAAABAE)
+#### Estructura del Proyecto Back-End
+
+El proyecto back-end está estructurado de la siguiente manera:
+
+back-end/
+│
+├── carpeta controllers/
+│   ├── userController.js
+│   └── authController.js
+│
+├── carpeta routes/
+│   ├── index.js
+│   └── user-router.js
+│
+├── carpeta services/
+│   └── database/
+│       ├── dbConfig.js
+│       └── userdb.js
+│
+├── carpeta test/
+│   ├── auth-controller.test.js
+│   ├── user-controller.test.js
+│   ├── user-middleware.test.js
+│   └── auth-middleware.test.js
+│
+├── carpeta utils/
+│   ├── logger.js
+│   └── pagination.js
+│
+├── app.js
+├── config.js
+└── index.js
+
+#### Ejemplos de Código
+
+A continuación, se presentan algunos ejemplos de código de los archivos mencionados:
+
+* **userController.js** :
+
+```
+import User from '../models/user.js';export const register = async (req, res) => {
+  // Implementación de la lógica para registrar un nuevo usuario
+};export const login = async (req, res) => {
+  // Implementación de la lógica para el inicio de sesión de usuario
+};
+```
+
+* **user-router.js** :
+
+```
+import { Router } from 'express';
+import { register, login } from '../controllers/userController.js';const router = Router();router.post('/register', register);
+router.post('/login', login);export default router;
+```
+
+* **dbConfig.js** :
+
+```
+import mongoose from 'mongoose';const uri = process.env.DB_URL;const options = {};const connectDB = async () => {
+  try {
+    await mongoose.connect(uri, options);
+    console.log('Conectado a MongoDB');
+  } catch (error) {
+    console.error('Error al conectar a MongoDB:', error);
+  }
+};export default connectDB;
+```
+
+### Front-End
+
+El front-end del proyecto está construido con React y consiste en una interfaz de usuario para interactuar con la API back-end.
+
+#### Estructura del Proyecto Front-End
+
+El proyecto front-end está estructurado de la siguiente manera:
+
+front-end/
+│
+├── carpeta components/
+│   ├── app/
+│   │   ├── App.js
+│   │   ├── ArbolDecisiones.js
+│   │   ├── CreateUser.js
+│   │   ├── LoginForm.js
+│   │   └── styles.css
+│   │
+│   └── index.js
+│
+├── index.js
+├── index.css
+└── reportWebVitals.js
+
+#### Ejemplos de Código
+
+A continuación, se presentan algunos ejemplos de código de los archivos mencionados:
+
+* **App.js** (Componente principal):
+
+```
+import React, { useState } from 'react';
+import LoginForm from './logingForm';
+import ArbolDecisiones from './ArbolDecisiones';
+import CreateUser from './CreateUser';
+import './styles.css';function App() {
+  // Lógica del componente
+}export default App;
+```
+
+* **LoginForm.js** (Componente para el formulario de inicio de sesión):
+
+```
+import React, { useState } from 'react';
+import './styles.css';const LoginForm = ({ onLoginSuccess }) => {
+  // Lógica del componente
+};export default LoginForm;
+```
+
+### Ejecución del Proyecto
+
+Para ejecutar el proyecto, siga los siguientes pasos:
+
+1. **Back-End** :
+
+* Asegúrese de tener MongoDB instalado y configurado.
+* Instale las dependencias del proyecto con `npm install`.
+* Inicie el servidor con `npm start`.
+
+1. **Front-End** :
+
+* Asegúrese de tener Node.js y npm instalados.
+* Instale las dependencias del proyecto con `npm install`.
+* Inicie la aplicación React con `npm start`.

@@ -1,0 +1,45 @@
+User:
+  type: object
+  properties:
+    id:
+      type: string
+      description: The unique identifier of the user.
+    name:
+      type: string
+      description: The name of the user.
+    lastName:
+      type: string
+      description: The last name of the user.
+    email:
+      type: string
+      format: email
+      description: The email address of the user.
+    role:
+      type: string
+      description: The role of the user.
+
+Story:
+  type: object
+  properties:
+    id:
+      type: string
+      description: The unique identifier of the story.
+    title:
+      type: string
+      description: The title of the story.
+    content:
+      type: string
+      description: The content of the story.
+
+Stage:
+  type: object
+  properties:
+    id:
+      type: string
+      description: The unique identifier of the stage.
+    storyId:
+      type: string
+      description: The ID of the story to which the stage belongs.
+    content:
+      type: string
+      description: The content of the stage.
