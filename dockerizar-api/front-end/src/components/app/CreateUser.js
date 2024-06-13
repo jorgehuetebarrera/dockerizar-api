@@ -19,7 +19,7 @@ const CreateUser = ({ onRegisterSuccess }) => {
     };
 
     try {
-      const response = await fetch('https://nightinarcadia.onrender.com', {
+      const response = await fetch('https://nithmarearcadia.onrender.com', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -86,7 +86,7 @@ const CreateUser = ({ onRegisterSuccess }) => {
       </label>
       <br />
       <button type="submit">Register</button>
-      <button type="button" onClick={redirectToLogin}>Go to Login</button>
+      
     </form>
   );
 };
