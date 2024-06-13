@@ -19,7 +19,7 @@ const CreateUser = ({ onRegisterSuccess }) => {
     };
 
     try {
-      const response = await fetch('https://thenightmarearcadia.onrender.com', {
+      const response = await fetch('https://noche-en-arcadia-la-noche-mas-oscura-nnxi.onrender.com', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
