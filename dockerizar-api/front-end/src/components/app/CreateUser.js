@@ -19,7 +19,7 @@ const CreateUser = ({ onRegisterSuccess }) => {
     };
 
     try {
-      const response = await fetch('https://thenightmarearcadia.onrender.com', {
+      const response = await fetch('https://noche-en-arcadia-la-noche-mas-oscura-nnxi.onrender.com', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -38,7 +38,10 @@ const CreateUser = ({ onRegisterSuccess }) => {
     }
   };
 
- 
+  const redirectToLogin = () => {
+    // Aquí puedes realizar la redirección al formulario de inicio de sesión
+    window.location.href = '/login'; // Cambia la ruta según tu configuración
+  };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -83,7 +86,7 @@ const CreateUser = ({ onRegisterSuccess }) => {
       </label>
       <br />
       <button type="submit">Register</button>
-      
+      <button type="button" onClick={redirectToLogin}>Go to Login</button>
     </form>
   );
 };
