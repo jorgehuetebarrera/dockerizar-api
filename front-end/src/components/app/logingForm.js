@@ -10,7 +10,7 @@ const LoginForm = ({ onLoginSuccess }) => {
     e.preventDefault();
 
     try {
-      const response = await fetch('https://https://nithmarearcadia.onrender.com', {
+      const response = await fetch('https://thenightmarearcadia.onrender.com', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
