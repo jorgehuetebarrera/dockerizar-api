@@ -1,12 +1,13 @@
 import { Router } from 'express';
-import {register, login, getUserById, getUserByEmail, updateUserById,updateUserByEmail, deleteUserByEmail} from '../controllers/userController.js'
+import {register, login, getUserById,getAllUsers , updateUserById, deleteUserByEmail} from '../controllers/userController.js'
 
 const router = Router();
 router.post('/user/register', register);
 router.post('/user/login', login);
-router.get('/user/data/email/:email', getUserByEmail);
+
 router.get('/user/data/id/:id', getUserById);
-router.put('/user/update/email/:email',updateUserByEmail);
+router.get('/user/data/id', getAllUsers);
+
 router.put('/user/update/id/:id', updateUserById);
 router.delete('/user/delete/:email', deleteUserByEmail);
 

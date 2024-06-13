@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import swaggerUi from 'swagger-ui-express';
 
-import router from '../routes/index.js';
+import router from '../routes/user-router.js';
 import { errorMiddleware } from '../middlewares/error-middleware.js';
 import { morganMiddleware } from '../config/morgan.js';
 import { swaggerDoc } from '../openapi/index.js';
@@ -23,4 +23,5 @@ export default function(server){
     server.use(router);
     /* Error handler */
     server.use(errorMiddleware);
+
 }
