@@ -68,7 +68,6 @@ El backend está organizado en varias carpetas, cada una con un propósito espec
 
 El archivo `config.js` contiene la configuración de la aplicación, como el puerto en el que se ejecutará el servidor y las credenciales de acceso a servicios externos, que se cargan desde variables de entorno.
 
-c
 
 ```
 onst config = {
