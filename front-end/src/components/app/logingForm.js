@@ -9,7 +9,7 @@ const LoginForm = ({ onLoginSuccess }) => {
 
     try {
       // Realizar la lógica de inicio de sesión (por ejemplo, con fetch)
-      const response = await fetch('https://arcadianight-i4rr.onrender.com', {
+      const response = await fetch('https://arcadias.onrender.com', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
