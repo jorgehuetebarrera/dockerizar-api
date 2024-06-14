@@ -8,8 +8,8 @@ const LoginForm = ({ onLoginSuccess }) => {
     e.preventDefault();
 
     try {
-      // Realizar la lógica de inicio de sesión (por ejemplo, con fetch)
-      const response = await fetch('https://arcadias.onrender.com', {
+      // Realizar la lógica de inicio de sesión 
+      const response = await fetch('https://arcadias.onrender.com/user/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
