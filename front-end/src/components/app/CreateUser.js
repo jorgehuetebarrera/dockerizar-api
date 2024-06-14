@@ -38,10 +38,7 @@ const CreateUser = ({ onRegisterSuccess }) => {
     }
   };
 
-  const redirectToLogin = () => {
-    // Aquí puedes realizar la redirección al formulario de inicio de sesión
-    window.location.href = '/login'; // Cambia la ruta según tu configuración
-  };
+
 
   return (
     <form onSubmit={handleSubmit}>
@@ -86,7 +83,7 @@ const CreateUser = ({ onRegisterSuccess }) => {
       </label>
       <br />
       <button type="submit">Register</button>
-      <button type="button" onClick={redirectToLogin}>Go to Login</button>
+  
     </form>
   );
 };
