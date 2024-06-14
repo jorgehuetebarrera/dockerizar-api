@@ -19,7 +19,7 @@ const CreateUser = ({ onRegisterSuccess }) => {
     };
 
     try {
-      const response = await fetch('https://arcadias.onrender.com', {
+      const response = await fetch('https://arcadias.onrender.com/user/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
